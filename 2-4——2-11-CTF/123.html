@@ -1,0 +1,1303 @@
+"C:\Program Files\Python36\python.exe" C:/Users/assu/PycharmProjects/python学习打卡/2-4-weibopinglun/213.py
+
+	<!doctype html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="wikiwand" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="wikiwand" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="wikiwand" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="wikiwand" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://ogp.me/ns#" class="no-js"> <!--<![endif]-->
+<head>
+
+	<!--header generic -->
+	
+	<!--this is the original url for google fonts-->
+	<link href='//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic|Lora:400,700,400italic,700italic|Merriweather:400italic,400,300italic,300,700,700italic|Open+Sans:300italic,400italic,700italic,700,300,400&subset=latin,cyrillic-ext,greek-ext,greek,devanagari,vietnamese,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/emffkefkbkpkgpdeeooapgaicgmcbolj">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<!--<script type="text/javascript"  src="https://s3.amazonaws.com/assets.wikiwand.com/ads.js"></script>-->
+	<link rel="apple-touch-icon" href="//d3isfnyiuldmfu.cloudfront.net/img/wikiwand_icon_apple.png"/>
+	
+
+	
+
+	
+	<img id="imagePlaceHolder" src="" height="0" width="0" style="opacity:0;position:fixed">
+	<script>
+
+		console.time('time up to showArticleContents');
+		var precache_from_extension = false;
+		if (window.location.hash.indexOf('precache_from_extension=true') > -1) {
+			precache_from_extension = true;
+		}
+		var pageLoadStart = new Date().getTime();
+		var pageHTMLReceived = (new Date()).getTime();
+		var genericData = {
+			debug: {
+				pageLoadedTimestamp: (new Date()).getTime()
+			}
+		};
+		var localContentHtml;
+		var localContentHtmlPartial;
+		var attempts = 0;
+		function tempConditioning(mystring) {
+			//this is to migrate old article contents until we do a database recaching (advance version)
+			//replace old pic-placeholder with one which supports both protocols
+			if (location.protocol == 'https:') {
+				var newstring = mystring.split('http://assets.cdn.wikiwand.com/img/pic-placeholder.gif').join('//d3isfnyiuldmfu.cloudfront.net/img/pic-placeholder.gif');
+			} else {
+				newstring = mystring;
+			}
+			return newstring;
+		}
+
+		function httpGet(theUrl, type) {
+			var xmlHttp = null;
+			xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function() {
+				if (xmlHttp.readyState == 4) // Finished
+				{
+					if (xmlHttp.status == 200) {
+						if (theUrl.indexOf('_PARTIAL_DOWNLOAD') == -1) {
+							//console.log('got full text');
+							localContentHtml = xmlHttp.responseText;
+						} else {
+							//console.log('got partial text');
+							localContentHtmlPartial = xmlHttp.responseText;
+						}
+					}
+					else {
+						console.log('failed with status ',xmlHttp.status);
+						attempts++;
+						if (attempts < 10 && (theUrl.indexOf('_PARTIAL_DOWNLOAD') == -1)) {
+							console.log("DOWNLOAD FAILED, TRYING AGAIN ", theUrl);
+							if (xmlHttp.status == 0) {
+								if (theUrl.indexOf('s3.amazonaws.com') != -1) {
+									if (attempts==9) {
+
+										setTimeout(function() {
+											var element;
+											if (typeof(noAdblock) == 'undefined') {
+												element = '#adblockNotice';
+											} else {
+												element = '#httpsEverywhereNotice';
+											}
+											if ($(element).length > 0) {
+												console.log(' element exists');
+												$(element).show();
+												$(element).css('opacity', 1);
+												$(element).detach().prependTo('#content');
+											}
+										}, 6000);
+									}
+								}
+								var urlOnS3 = 'https://s3.amazonaws.com/ww-article-cache-1/en/X-Forwarded-For';
+								urlOnS3 = urlOnS3.replace('http://', '//').replace('https://', '//');
+								urlOnS3 = urlOnS3.replace(/\+/g, '%2B');
+								httpGet(urlOnS3, 'html');
+								httpGet(urlOnS3, 'html');
+							} else {
+								//console.log('status ', xmlHttp);
+								setTimeout(function() {
+									httpGet(theUrl, 'html');
+								}, 500);
+							}
+						}
+					}
+				}
+			};
+			xmlHttp.open("GET", theUrl, true);
+			xmlHttp.send(null);
+		}
+	</script>
+	
+	<script>
+		//console.log('have cdn file in generic header, this is cached');
+		var loadedFromCache = true;
+		var urlOnCdn = 'https://db0nus869y26v.cloudfront.net/en/X-Forwarded-For?rev=1517737962778';
+		urlOnCdn = urlOnCdn.replace('http://', '//').replace('https://', '//');
+		urlOnCdn = urlOnCdn.replace(/\+/g, '%2B');
+		httpGet(urlOnCdn, 'html');
+		//var partialDownloadUrl=urlOnCdn.replace('?rev','_PARTIAL_DOWNLOAD?rev');
+		//httpGet(partialDownloadUrl,'html');
+		try {
+			var mainImageUrl = '';
+			mainImageUrl = mainImageUrl.replace('https://', '//').replace('http://', '//');
+			var image = document.getElementById("imagePlaceHolder");
+			image.src = mainImageUrl;
+		}
+		catch (e) {console.log('error predownloading image', e);}
+	</script>
+	
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+
+	<!--
+	
+	<link rel="stylesheet" href="//d3isfnyiuldmfu.cloudfront.net/css/fonts.92ff4698.css" type="text/css" media="screen"/>
+	
+	-->
+
+	
+
+	
+	<script> var CURRENT_USER_ID=null; </script>
+	
+
+	 
+
+	
+
+	<link rel="stylesheet" href="//d3isfnyiuldmfu.cloudfront.net/css/wikiwand.early.min.ef22ab1e.css" type="text/css" media="screen"/>
+	<script type="text/javascript" src="//d3isfnyiuldmfu.cloudfront.net/js/wikiwand.early.min.11f35ea2.js"></script>
+	
+	
+
+	
+
+	
+
+
+
+	<!-- BEGIN TRACKJS -->
+	<script type="text/javascript">
+		var LOAD_TRACKJS = false;
+		if (LOAD_TRACKJS && !precache_from_extension) {
+			window._trackJs = {
+				token: '9bcd9b3d130a4b8eb9f58ff06e6781b5',
+				callback: {enabled: false},
+				console: {enabled: true, display: true, error: false},
+				network: {enabled: false},
+				visitor: {enabled: false},
+				window: {enabled: false},
+				onError: function(payload, error) {
+
+					// List borrowed from the awesome @pamelafox
+					// https://gist.github.com/pamelafox/1878283
+					var i, commonCrypticExtensionErrors = [
+						"top.GLOBALS",
+						"originalCreateNotification",
+						"canvas.contentDocument",
+						"MyApp_RemoveAllHighlights",
+						"http://tt.epicplay.com",
+						"Can't find variable: ZiteReader",
+						"jigsaw is not defined",
+						"ComboSearch is not defined",
+						"http://loading.retry.widdit.com/",
+						"atomicFindClose",
+						"fb_xd_fragment",
+						"Script error",
+						"__adg_gm_commands_api",
+						"A Chrome Web Store installation is already pending.",
+						"‘-×´]/: Range out of order in character class"
+					];
+					for (i = 0; i < commonCrypticExtensionErrors.length; i++) {
+						if (payload.message.indexOf(commonCrypticExtensionErrors[i]) > -1) {
+							// returning any kind of falsy value will reject error
+							return false;
+						}
+					}
+					return true; // Return any kind of truthy value here to allow transmission of error
+				}
+			};
+			var fileref = document.createElement('script');
+			fileref.setAttribute("type", "text/javascript");
+			fileref.setAttribute("src", "//d2zah9y47r7bi2.cloudfront.net/releases/current/tracker.js");
+			if (typeof fileref != "undefined")    document.getElementsByTagName("head")[0].appendChild(fileref);
+		}
+	</script>
+
+
+
+
+
+	
+	
+
+	
+	<script>
+		// disable all logs
+		if (document.location.search.indexOf('debug_logs=1') == -1) {
+			console.log = function() {};
+			console.time = function() {};
+			console.timeEnd = function() {};
+		}
+	</script>
+
+
+	
+
+	<script>
+		
+		
+			var serverData={"layout":"wikiwand","publisherMonetization":"false","showTOC":"true","agent":{"string":"python-requests/2.18.4","ua":{"family":"Python Requests","major":"2","minor":"18","patch":null},"userAgent":{"family":"Python Requests","major":"2","minor":"18","patch":null},"os":{"family":"Other","major":null,"minor":null,"patch":null,"patchMinor":null},"device":{"family":"Other"},"family":"Python Requests","major":2,"minor":18,"isMobileRes":false,"extensionInstalled":false,"fromSearchWidget":false,"isBot":false,"isHuman":false},"config":{"environment":"production","features":{"news":false,"map":true,"toc":true,"gallery":true,"partials":true,"apiCache":true,"invites":false,"articlePromo":true,"classification":false,"moduleYouTubeVideo":false,"webSocket":false,"snippet":true,"userManagement":true,"comments":false,"reportBoardActions":true,"paywall":false,"boards":false,"comparisons":false},"agent":{"string":"python-requests/2.18.4","ua":{"family":"Python Requests","major":"2","minor":"18","patch":null},"userAgent":{"family":"Python Requests","major":"2","minor":"18","patch":null},"os":{"family":"Other","major":null,"minor":null,"patch":null,"patchMinor":null},"device":{"family":"Other"},"family":"Python Requests","major":2,"minor":18,"isMobileRes":false,"extensionInstalled":false,"fromSearchWidget":false,"isBot":false,"isHuman":false},"facebook":{"appId":"823404911083396"}},"cpu":110,"fromSearchEngine":false,"callToInstallExtension":false,"settings":{"whitelist":["/en/Kinsey_scale","/en/Mokomokai","/en/Binomial_distribution","/en/Lee_Van_Cleef","/en/Gutter_oil","/en/Yūki_Kaji"],"tests":{"mon_p":{"none":0},"mon_footer":{"recommendations":0,"adsense":0},"mon_footer_b":{"wikipedia":0},"mon_bottom":{"none":100},"mon_ocd":{"msg":0}},"boards":{"percent_see_gen_buttons":100},"msg_to_all_users":{"show":false,"text":"Due to a global Amazon S3 outage, article load times may be longer than usual.<BR>In the meantime, you can use the toolbar to skip to Wikipedia. We appreciate your patience."},"pw":false,"redirect_all_users":"no","monPlus":false}};
+		
+		
+		
+
+		
+			var articleData={"cache":{"cacheDBVer":54,"cacheDate":1517737962778,"hash":"bcedc6411087956abdaddf9eea59612a","key":"/en/X-Forwarded-For","wikiRevision":"823931635","canonical":"/en/X-Forwarded-For","isCanonical":true,"S3FileUrl":"https://s3.amazonaws.com/ww-article-cache-1/en/X-Forwarded-For","CDNFileUrl":"https://db0nus869y26v.cloudfront.net/en/X-Forwarded-For?rev=1517737962778"},"langCodeUrl":"en","rawArticlePath":"X-Forwarded-For","fonts":{},"bodyClasses":["lg_latin"],"hasInfobox":true,"facts":[],"photos":[],"title":"X-Forwarded-For","geo":null,"TOC":{"type":"ul","id":"toc_btn_article-root-section","href":"article-root-section","text":"","children":[{"type":"od","classesHtml":"","special":false,"id":"toc_btn_overview","href":"overview","text":"Introduction","children":[]},{"type":"od","classesHtml":"","special":false,"id":"toc_btn_Format","href":"Format","text":"Format","children":[]},{"type":"od","classesHtml":"","special":false,"id":"toc_btn_Proxy_servers_and_caching_engines","href":"Proxy_servers_and_caching_engines","text":"Proxy servers and caching engines","children":[]},{"type":"od","classesHtml":"","special":false,"id":"toc_btn_Load_balancers","href":"Load_balancers","text":"Load balancers","children":[]},{"type":"od","classesHtml":"","special":false,"id":"toc_btn_Alternatives_and_variations","href":"Alternatives_and_variations","text":"Alternatives and variations","children":[]},{"type":"od","classesHtml":" class='special'","special":true,"id":"toc_btn_See_also","href":"See_also","text":"See also","children":[]},{"type":"od","classesHtml":" class='special'","special":true,"id":"toc_btn_References","href":"References","text":"References","children":[]},{"type":"od","classesHtml":" class='special'","special":true,"id":"toc_btn_External_links","href":"External_links","text":"External links","children":[]}],"hasChildren":true},"pageIsArticle":true,"links":{"selfRead":"http://wikiwand.com/en/X-Forwarded-For","wikipediaRead":"https://en.wikipedia.org/wiki/X-Forwarded-For?oldformat=true","wikipediaEdit":"https://en.wikipedia.org/w/index.php?title=X-Forwarded-For&action=edit","wikipediaHistory":"https://en.wikipedia.org/w/index.php?title=X-Forwarded-For&action=history","wikipediaPrint":"https://en.wikipedia.org/w/index.php?title=X-Forwarded-For&printable=yes","wikipediaTalk":"https://en.wikipedia.org/wiki/Talk:X-Forwarded-For?oldformat=true","wikipediaDownload":"https://en.wikipedia.org/w/index.php?title=Special:Book&bookcmd=render_article&arttitle=X-Forwarded-For&writer=rl"},"meta":{"title":"X-Forwarded-For | Wikiwand","keywords":"qw, X-Forwarded-For, English","description":"The X-Forwarded-For HTTP header field is a common method for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer.","robots":"index,follow","url":"https://www.wikiwand.com/en/X-Forwarded-For","image":"//d3isfnyiuldmfu.cloudfront.net/img/wikiwand_icon.png"},"fromWikipedia":"From Wikipedia, the free encyclopedia","disambiguations":["\"XFF\" redirects here. For the aircraft, see <a href=\"/en/Grumman_FF\" title=\"Grumman FF\" class=\"int-link\">Grumman FF</a>.","<span class=\"plainlinks selfreference noprint\">For network administrators seeking to reduce collateral damage due to autoblocks on their proxy servers, see <a href=\"https://meta.wikimedia.org/wiki/XFF_project\" class=\"extiw ext-link\" title=\"meta:XFF project\" rel=\"nofollow\" target=\"_blank\">XFF project</a>.</span>"],"searchTranslation":"Search Wikipedia","mainImage":{"mode":"none"},"availableLanguages":[{"langEnglishName":"Chinese","langNativeName":"中文","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh","articleTitle":"X-Forwarded-For","articleLink":"/zh/X-Forwarded-For","score":0},{"langEnglishName":"Czech","langNativeName":"česky","langAbberviation":"cs","langCodeHTML":0,"langCodeURL":"cs","articleTitle":"X-Forwarded-For","articleLink":"/cs/X-Forwarded-For","score":0},{"langEnglishName":"Dutch","langNativeName":"Nederlands","langAbberviation":"nl","langCodeHTML":0,"langCodeURL":"nl","articleTitle":"X-Forwarded-For","articleLink":"/nl/X-Forwarded-For","score":0},{"langEnglishName":"English","langNativeName":"English","langAbberviation":"en","langCodeHTML":0,"langCodeURL":"en","articleTitle":"X-Forwarded-For","articleLink":"/en/X-Forwarded-For","score":1},{"langEnglishName":"German","langNativeName":"Deutsch","langAbberviation":"de","langCodeHTML":0,"langCodeURL":"de","articleTitle":"X-Forwarded-For","articleLink":"/de/X-Forwarded-For","score":1},{"langEnglishName":"Hebrew","langNativeName":"עברית","langAbberviation":"he","langCodeHTML":0,"langCodeURL":"he","articleTitle":"X-Forwarded-For","articleLink":"/he/X-Forwarded-For","score":0},{"langEnglishName":"Hungarian","langNativeName":"magyar","langAbberviation":"hu","langCodeHTML":0,"langCodeURL":"hu","articleTitle":"X-Forwarded-For","articleLink":"/hu/X-Forwarded-For","score":0},{"langEnglishName":"Japanese","langNativeName":"日本語","langAbberviation":"ja","langCodeHTML":0,"langCodeURL":"ja","articleTitle":"X-Forwarded-For","articleLink":"/ja/X-Forwarded-For","score":0},{"langEnglishName":"Korean","langNativeName":"한국어","langAbberviation":"ko","langCodeHTML":0,"langCodeURL":"ko","articleTitle":"XFF","articleLink":"/ko/XFF","score":0},{"langEnglishName":"Serbian","langNativeName":"српски / srpski","langAbberviation":"sr","langCodeHTML":0,"langCodeURL":"sr","articleTitle":"XFF","articleLink":"/sr/XFF","score":0},{"langEnglishName":"Simple English","langNativeName":"Simple English","langAbberviation":"si","langCodeHTML":0,"langCodeURL":"simple","articleTitle":"X-Forwarded-For","articleLink":"/simple/X-Forwarded-For","score":0},{"langEnglishName":"Simplified Chinese","langNativeName":"中文（简体)","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-hans","articleTitle":"X-Forwarded-For","articleLink":"/zh-hans/X-Forwarded-For","score":0},{"langEnglishName":"Simplified Chinese (China)","langNativeName":"中文（中国大陆)","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-cn","articleTitle":"X-Forwarded-For","articleLink":"/zh-cn/X-Forwarded-For","score":0},{"langEnglishName":"Simplified Chinese (Singapore)","langNativeName":"中文（新加坡）","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-sg","articleTitle":"X-Forwarded-For","articleLink":"/zh-sg/X-Forwarded-For","score":0},{"langEnglishName":"Traditional Chinese","langNativeName":"中文（繁體）","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-hant","articleTitle":"X-Forwarded-For","articleLink":"/zh-hant/X-Forwarded-For","score":0},{"langEnglishName":"Traditional Chinese (Hong Kong)","langNativeName":"中文（香港）","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-hk","articleTitle":"X-Forwarded-For","articleLink":"/zh-hk/X-Forwarded-For","score":0},{"langEnglishName":"Traditional Chinese (Macau)","langNativeName":"中文（澳門）","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-mo","articleTitle":"X-Forwarded-For","articleLink":"/zh-mo/X-Forwarded-For","score":0},{"langEnglishName":"Traditional Chinese (Taiwan)","langNativeName":"中文（台灣）","langAbberviation":"zh","langCodeHTML":0,"langCodeURL":"zh-tw","articleTitle":"X-Forwarded-For","articleLink":"/zh-tw/X-Forwarded-For","score":0}]};
+		
+
+	</script>
+	<script>
+		if (location.host=='translate.googleusercontent.com' && location.search){
+
+			var requestedLang=location.search.split('tl=')[1];
+			if (requestedLang) {
+				requestedLang = requestedLang.split('&')[0];
+				var desiredLink = articleData.links.selfRead.replace('http://', 'https://');
+				for (idx in articleData.availableLanguages) {
+					var lang = articleData.availableLanguages[idx];
+					if (lang.langCodeURL == requestedLang) {
+						desiredLink = 'https://www.wikiwand.com' + lang.articleLink;
+						break;
+					}
+				}
+				window.location = desiredLink;
+				var dontReport=true;
+			}
+		}
+	</script>
+
+	<title>X-Forwarded-For - Wikiwand</title>
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@wikiwand">
+	<meta name="twitter:app:name:iphone" content="Wikiwand">
+	<meta name="twitter:app:name:ipad" content="Wikiwand">
+	<meta name="twitter:app:id:iphone" content="947444965" />
+	<meta name="twitter:app:id:ipad" content="947444965" />
+	
+	<meta name="twitter:app:url:iphone" content="wikiwand-article://en/X-Forwarded-For" />
+	<meta name="twitter:app:url:ipad" content="wikiwand-article://en/X-Forwarded-For" />
+	<meta name="apple-itunes-app" content="app-id=947444965, app-argument=wikiwand-article://en/X-Forwarded-For"/>
+	
+	<meta property="al:ios:url" content="wikiwand://applinks" />
+	<meta property="al:ios:app_store_id" content="947444965" />
+	<meta property="al:ios:app_name" content="Wikiwand" />
+	<meta property="fb:app_id" content="823404911083396" />
+
+	<meta name="robots" content="index,follow" />
+
+	
+		<meta property="og:type" content="article" />
+		<meta property="og:site_name" content="Wikiwand" />
+		<meta property="og:url" content="https://www.wikiwand.com/en/X-Forwarded-For" />
+
+		<meta property="og:title" content="X-Forwarded-For | Wikiwand" />
+		<meta property="twitter:title" content="X-Forwarded-For | Wikiwand" />
+
+		<meta property="og:description" content="The X-Forwarded-For HTTP header field is a common method for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer." />
+		<meta name="description" content="The X-Forwarded-For HTTP header field is a common method for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer." />
+		<meta name="twitter:description" content="The X-Forwarded-For HTTP header field is a common method for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer." />
+		
+		<link rel="image_src" href="//d3isfnyiuldmfu.cloudfront.net/img/wikiwand_icon.png"/>
+		<meta property="og:image" content="//d3isfnyiuldmfu.cloudfront.net/img/wikiwand_icon.png" />
+		<meta property="twitter:image:src" content="//d3isfnyiuldmfu.cloudfront.net/img/wikiwand_icon.png" />
+		
+
+		<meta name="keywords" content="qw, X-Forwarded-For, English" />
+	
+
+    
+
+</head>
+
+
+<body class="lg_latin bsp1 bsp2 lang_en bsp3"
+	ng-class="$root.userBodyStyle" ng-controller="ShellController"
+
+	ng-init="initializeShellController()">
+
+
+
+
+
+	<div id="body_wrapp"
+		ng-click="clickedOutside()" ng-mousedown="clickedAnywhere($event)">
+
+	
+<div ng-cloak ng-if="precache_from_extension">For faster navigation, this Iframe is preloading the Wikiwand page for <b>X-Forwarded-For</b>.
+
+</div>
+
+<nav ng-if="!hideToolbar"
+	ng-cloak ng-hide="$root.serverData.agent.iOSWebView"
+	ng-class="{active:!$root.tocShow}"
+	ng-controller='ToolbarController' id="header"
+	class=" unselectable"
+	>
+		<ul id="main_menu" ng-class="{ios_focus: $root.iosFocus}" class="menu  navbar_opaque ">
+			
+			<li class="toc_folded" ng-class="{activated:!$root.tocShow, gone: searchFocus}"  ng-click="$root.tocFold(); $root.userClick(true, 'toolbar-toc-show');"><i></i></li>
+			
+			<li class="article_btn article" ng-class="{active:showWikiwandMenu, gone: searchFocus}" ng-click="toggleWikiwandMenu($event); $root.userClick(showWikiwandMenu, 'toolbar-mainmenu');" >
+				<img class="logo_img unselectable" src="//d3isfnyiuldmfu.cloudfront.net/img/logo_new.svg?h=1e5c92df6d73fff6c28e1983e177de13" alt="wikiwand logo"/>
+				<img class="hide logo_w unselectable" src="//d3isfnyiuldmfu.cloudfront.net/img/w.svg?h=7f5c0aee0bcbfa8d70bf8c4f1172d30c" alt="wikiwand w"/>
+				<i></i>
+				<div class="drop_down" ng-show="showWikiwandMenu" ng-click="clickedInside($event)">
+
+					<ul id="feadback_list" ng-show="!showUserVoice && !showCoverReport">
+						<li><a href="/"><i class="home_icon"></i>Home</a></li>
+						<li><a href="/news"><i class="news_icon"></i>News</a></li>
+
+						
+						<li><a href="/random/en"><i class="random_icon"></i>Random Article</a></li>
+						
+
+						<li ng-if="!activation.extensionInstalled"><a href="#" ng-click="$root.showInstall = true" onclick="event.preventDefault();"><i class="install_icon"></i>Install Wikiwand</a></li>
+						<li><a href="#" ng-click="$root.showFollow = true; loadGplusScript()" onclick="event.preventDefault();"><i class="follow_icon"></i>Follow Us</a></li>
+
+						<!--<li><a href="http://wikiwand.uservoice.com" target="_blank"><i class="support_icon"></i>Support</a></li>-->
+						<!---->
+						<!--<!<li><a href="javascript:void(0);" ng-click="showUserVoice=true; openUserVoiceDialog()" onclick="event.preventDefault()"><i class="report_icon"></i>Report a problem</a></li>-->
+
+						<li><a ng-click="closeAllMenus()" href="http://wikiwand.uservoice.com/forums/247843-wikiwand-website-extensions" target="_blank"><i class="idea_icon"></i>Send a suggestion</a></li>
+						<li ng-if="activation.extensionInstalled"><a href="/extension/uninstall/menu" target="_blank"><i class="uninstall_icon"></i>Uninstall Wikiwand</a></li>
+
+						<!--<li ng-if="$root.activation.showSwitchToWikipedia"><a href="javascript:void(0);" ng-click="closeAllMenus(); $root.walkthroughs['switch_to_wp'].showWalkthrough=true;" onclick="event.preventDefault()"><i class="wiki_icon"></i>Switch to Wikipedia</a></li>-->
+						<!--<li ng-if="!$root.activation.showSwitchToWikipedia"><a href="javascript:void(0);" ng-click="closeAllMenus()" ng-href="{{::articleData.links.wikipediaRead }}" target="_blank"><i class="wiki_icon"></i>Switch to Wikipedia</a></li>-->
+
+					</ul>
+
+					<div id="user_voice_wrapper" ng-show="showUserVoice">
+
+					</div>
+
+
+					<div id="cover_report" ng-show="showCoverReport">
+						<article ng-cloak ng-show="$root.showReportCoverImageText1">
+							<h3>Our magic isn't perfect</h3>
+							<p>You can help our automatic cover photo selection by reporting an unsuitable photo.</p>
+							<div ng-click="$root.reportImage($event,'disturbing',articleData.mainImage.full.originalUrl)">The cover is visually disturbing</div>
+							<div ng-click="$root.reportImage($event,'irrelevant',articleData.mainImage.full.originalUrl)">The cover is not a good choice</div>
+						</article>
+
+						<article ng-cloak ng-show="$root.showReportCoverImageText2">
+							<h4>Thank you for helping!</h4>
+							<br>
+							<p>Your input will affect cover photo selection, along with input from other users.<br>
+						</article>
+
+					</div>
+
+					<div id="feadback_back" ng-show="showUserVoice || showCoverReport" ng-click="showUserVoice=false;showCoverReport=false;$root.showReportCoverImageText1=true;$root.showReportCoverImageText2=false;">&#60; back</div>
+
+
+				</div>
+
+			</li>
+
+
+			<li class="search_btn menu-tooltip"  title="Search" ng-click="$root.openSearch('open'); $root.userClick(true, 'toolbar-search');">
+				<i></i>
+			</li>
+
+
+
+			
+			<li class="per_btn menu-tooltip" ng-class="{active:showPerMenu, gone: searchFocus}" ng-click="togglePerMenu($event); $root.userClick(showPerMenu, 'toolbar-pers');" title="Personalize">
+				<i ></i>
+				<div class="drop_down menu_per" id="pref_drop_down" ng-if="showPerMenu" ng-show="preMenuReady" ng-controller="UserPrefsController" ng-init="initPrefsController()" ng-click="prefClick(); clickedInside($event)">
+
+					<ul class="main_theme">
+						<li ng-click="$root.layoutHandler('rich')" ng-class="{active: $root.minimalStyle == false}">Rich</li>
+						<li ng-click="$root.layoutHandler('minimal')" ng-class="{active: $root.minimalStyle == true}">Minimal</li>
+					</ul>
+
+					<div class="per_slider two style per_serif">
+						<span class="hover" ng-click="$root.fontStyleHandler(0, true)">Serif</span>
+						<div id="font_style_slider" class="toggle_slider"></div>
+						<span class="hover" ng-click="$root.fontStyleHandler(1, true)">Sans</span>
+					</div>
+
+					<div class="per_slider two theme">
+						<span class="hover" ng-click="$root.themesHandler(0, true)"></span>
+						<div id="theme_slider" class="toggle_slider"></div>
+						<span class="hover" ng-click="$root.themesHandler(1, true)"></span>
+					</div>
+
+					<div class="per_slider three size">
+						<span class="hover" ng-click="fontSizeSlider =  Math.max(fontSizeSlider - 1, 0); $root.txtSizeHandler(fontSizeSlider, true);"></span>
+						<div id="font_size_slider" class="step_slider"></div>
+						<span class="hover" ng-click="fontSizeSlider =  Math.min(fontSizeSlider + 1, 2); $root.txtSizeHandler(fontSizeSlider, true);"></span>
+					</div>
+
+					<div class="per_slider three column">
+						<span class="hover" ng-click="columnWidthSlider =  Math.max(columnWidthSlider - 1, 0); $root.columnWidthHandler(columnWidthSlider, true)"></span>
+						<div id="column_slider" class="step_slider"></div>
+						<span class="hover" ng-click="columnWidthSlider =  Math.min(columnWidthSlider + 1, 2); $root.columnWidthHandler(columnWidthSlider, true)"></span>
+					</div>
+
+
+					<div class="per_justify" ng-click="$root.justifyHandler(!$root.justifyTxt)"><i ng-class="{active: $root.justifyTxt}"></i>Justify Text</div>
+
+					<a href="javascript:void(0);" ng-cloak ng-if="$root.callToPersonalize && $root.prefsTouched"
+						ng-class="{active: btnHover}"
+                        ng-mouseenter="$root.activationHover('enter')"
+                        ng-mouseleave="$root.activationHover('leave')"
+						ng-click="hidePerMenu($event); $root.reportClick('fromPrefs');$root.activationButtonClicked('');$root.extensionPopup('click');"
+						class="upgrade_button small activation_install preferences_install" >
+						Get Wikiwand
+                        <i></i>
+					</a>
+
+
+					<!--<div class="per_reset" ng-click="$root.resetPreferences();">Reset</div>-->
+					<div class="per_httpsnotice" ng-if="::isHttps">Note: preferences and languages are saved separately in https mode</div>
+				</div>
+			</li>
+			
+
+			<!--
+			<li class="find_btn menu-tooltip" title="Find in article" ng-class="{active: showFindMenu}">
+				<i></i>
+			</li>
+			-->
+
+			
+			<li class="lang_btn menu-tooltip" ng-class="{active:showLanguageMenu, gone: searchFocus}" title="Other Languages" ng-click="toggleLanguageMenu($event); $root.userClick(showLanguageMenu, 'toolbar-lang');" >
+				<i ng-cloak>{{::langAbbreviation}}</i>
+
+				<ul  ng-cloak class="drop_down" ng-show="showLanguageMenu"
+					ng-controller="PreferredLanguagesController">
+					<li ng-cloak class="favourite_lang" ng-class="{current_lang: lang.lang == articleData, no_lang: !lang.hasArticle}" ng-repeat="lang in list">
+						<a href="{{::lang.articleLink}}" rel="alternate" ng-if="::lang.fav"
+							title="{{::lang.tooltip}}"
+						hreflang="{{::lang.CodeHTML}}"><i>{{::lang.langAbberviation}}</i>{{::lang.NameEnglish}}
+						<span>{{::lang.articleTitle}}</span></a></li>
+					<li class="favourite_lang lang_open" ng-if="articleData.availableLanguages.length > numOfAvailablePreferredLanguages"><a href="javascript:void(0);" ng-click="$root.$broadcast('showAllArticleLanguagesFunc')">
+						<i>∙∙∙</i>18 other languages</a></li>
+					<li class="lang_pref"><a href="javascript:void(0);" ng-click="$root.$broadcast('showAllWikipediaLanguagesFunc')">
+						<i></i>Language preferences</a></li>
+				</ul>
+			</li>
+			
+
+
+
+
+			<li class="share_btn article menu-tooltip" ng-class="{active:showShareMenu, gone: searchFocus}" ng-click="toggleShareMenu($event); $root.userClick(showShareMenu, 'toolbar-share');"  title="Share Article ">
+				<i></i>
+				<div class="drop_down menu_share" id="share_drop_down" ng-show="showShareMenu" ng-click="clickedInside($event)">
+					<ul class="share_links">
+						<li class="share-facebook"><a class="hover" href="#" target="_blank" ng-click="$root.userClick(showShareMenu, 'toolbar-share-facebook');"></a></li>
+						<li class="share-gplus"><a class="hover" href="#" target="_blank" ng-click="$root.userClick(showShareMenu, 'toolbar-share-gplus');"></a></li>
+						<!--<li class="share-reddit"><a class="hover" href="#" target="_blank" ng-click="$root.userClick(showShareMenu, 'toolbar-share-reddit');"></a></li>-->
+						<li class="share-twitter"><a class="hover" href="#" target="_blank" ng-click="$root.userClick(showShareMenu, 'toolbar-share-twitter');"></a></li>
+						<li class="share-gmail"><a class="hover" href="#" target="_blank" ng-click="$root.userClick(showShareMenu, 'toolbar-share-gmail');"></a></li>
+					</ul>
+				</div>
+			</li>
+
+
+
+
+			<li class="feedback_btn article menu-tooltip" ng-class="{active:showFeedbackMenu, gone: searchFocus}" ng-click="toggleFeedbackMenu($event); $root.userClick(showFeedbackMenu, 'toolbar-report');" title="Wikipedia Tools">
+				<i></i>
+				<ul class="drop_down menu_feedback" id="feedback_drop_down" ng-show="showFeedbackMenu" >
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaRead }}" target="_blank"><i class="read_w_icon"></i>Read On Wikipedia</a></li>
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaEdit }}" target="_blank"><i class="edit_w_icon"></i>Edit</a></li>
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaHistory }}" target="_blank"><i class="history_w_icon"></i>History</a></li>
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaTalk }}" target="_blank"><i class="talk_w_icon"></i>Talk Page</a></li>
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaPrint }}" target="_blank"><i class="print_w_icon"></i>Print</a></li>
+					<li class="wikipedia_list"><a ng-href="{{::articleData.links.wikipediaDownload }}" target="_blank"><i class="download_w_icon"></i>Download PDF</a></li>
+					<!--<li class="wikipedia_list"><a ng-href="https://en.wikipedia.org/wiki/Special:Watchlist" target="_blank"><i class="watch_icon"></i>Your Watchlist</a></li>-->
+					<!--<li class="wikipedia_list"><a ng-href="https://{{::articleData.langCodeUrl }}.wikipedia.org" target="_blank"><i class="home_icon"></i>Wikipedia Home Page</a></li>-->
+				</ul>
+			</li>
+
+
+			
+			<li class="bookmark_btn article menu-tooltip" ng-class="{active:$root.showBookmarkFeed, gone: searchFocus}" ng-click="toggleBookmarkFeed($event); $root.userClick($root.showBookmarkFeed, 'toolbar-report');" title="My Bookmarks">
+				<i></i>
+				<span ng-if="$root.bookmarkCount === 0" style="font-size: 14px">+</span>
+				<span ng-if="$root.bookmarkCount < 10 && $root.bookmarkCount !== 0">{{$root.bookmarkCount}}</span>
+				<span ng-if="$root.bookmarkCount >= 10" class="two">9+</span>
+			</li>
+			
+
+
+
+
+
+			<span class="menu_line"></span>
+
+
+			
+
+
+
+
+<li  ng-cloak
+	class="upgrade_btn menu-tooltip {{::$root.activation.nextAction}}"
+	title="{{::$root.activation.tooltip}}"
+	ng-if="$root.activation.nextAction != ''"
+	ng-class="{active: hover}"
+	ng-mouseenter="hover = true; $root.extensionPopup('enter');" ng-mouseleave="hover = false; $root.extensionPopup('leave');"
+	ng-click="$root.reportClick('toolbar');$root.activationButtonClicked();  $root.extensionPopup('click');">
+
+	<span ng-if="$root.activation.nextAction != 'activation_share'" class="upgrade_txt">{{::$root.activation.text}}</span>
+	<span ng-if="$root.activation.nextAction == 'activation_share'" class="upgrade_txt">{{::$root.activation.toolbarText}}</span>
+	<i>
+		
+	</i>
+
+</li>
+<!--
+<a href="javascript:void(0);" ng-cloak ng-class="{active: hover}"
+	ng-mouseenter="hover = true"  ng-mouseleave="hover = false"
+	ng-click="activationButtonClicked();" class="upgrade_button activation_button_toolbar small {{::activation.action}}" >
+	<span>{{activation.text}}</span><i></i>
+</a>
+-->
+
+		</ul>
+
+
+
+
+	</nav>
+
+
+
+
+
+
+
+<!--*************************** content  *************************-->
+<div id="content" ng-class="{limit: $root.limitPage, active:!$root.tocShow}" class=" small_image">
+
+
+	<!--************ news Article section ************-->
+	
+
+
+	
+
+	
+	
+
+	<!--************ main_image ************-->
+		
+	<!--************ main_image ENDS ************-->
+	
+	
+
+	
+
+<article ng-cloak id="article_content_wrapper" ng-controller="ArticleContentController"
+	ng-class="{withGist: $root.gistOn, minimal_margin: $root.minimalStyle, loaded: showArticleContents, narrow_column: $root.columnWidth=='narrow', wide_column: $root.columnWidth=='wide',
+	full_column: $root.columnWidth=='full', no_cover: articleMarginTop=='noCover', margin_initial: articleMarginTop=='initial', margin_low: articleMarginTop=='low', margin_middle: articleMarginTop=='middle', margin_high: articleMarginTop=='high'}"
+
+	class=" ">
+
+	
+
+	<section class="title_wrapper">
+
+		<h1 class="firstHeading">
+			<span class="">X-Forwarded-For</span>
+
+
+			
+			<span class="title_icon disambig-wrapper unselectable" onclick="event.stopPropagation()"></span>
+			
+
+			<a href='{{::articleData.links.wikipediaEdit }}' target='_blank' class='title_icon edit_article edit_section tooltip_top' title='Edit Article'></a>
+
+			<!--<span class="title_icon geo-location tooltip_top" title="Browse map" ng-if="$root.map.exists" ng-class="{loading: $root.mapLoading}" onClick="loadGoogleMaps();"></span>
+
+			<span class="title_icon like_buttons unselectable" onclick="event.stopPropagation()"></span>-->
+
+			
+		</h1>
+
+
+		<!-- READ MORE SECTION-->
+		<nav id="read_more" ng-style="{opacity:showReadMore}">
+
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px">
+				<path d="M9.512,8.692L8.073,7.331C8.24,7.026,8.344,6.682,8.344,6.31c0-1.179-0.956-2.135-2.135-2.135	c-1.18,0-2.137,0.955-2.137,2.135s0.957,2.136,2.137,2.136c0.416,0,0.801-0.124,1.129-0.33l1.438,1.359	C8.993,9.188,9.238,8.924,9.512,8.692z"/>
+				<path d="M15.603,8.522l1.912-3.22c0.188,0.054,0.384,0.093,0.589,0.093c1.182,0,2.138-0.956,2.138-2.136 c0-1.179-0.956-2.134-2.138-2.134c-1.18,0-2.135,0.955-2.135,2.134c0,0.586,0.236,1.115,0.618,1.501l-1.907,3.21	C15.008,8.119,15.316,8.305,15.603,8.522z"/>
+				<path d="M22.199,11.217c-0.918,0-1.696,0.583-1.998,1.397l-2.657-0.262c0,0.02,0.003,0.039,0.003,0.059 c0,0.346-0.039,0.685-0.107,1.012l2.657,0.263c0.16,1.019,1.038,1.801,2.103,1.801c1.18,0,2.135-0.955,2.135-2.135	C24.334,12.173,23.379,11.217,22.199,11.217z"/>
+				<path d="M14.865,19.612l-0.594-2.597c-0.336,0.117-0.685,0.201-1.049,0.243l0.596,2.596c-0.683,0.357-1.153,1.063-1.153,1.887 c0,1.18,0.954,2.134,2.137,2.134c1.179,0,2.134-0.954,2.134-2.134C16.937,20.584,16.015,19.646,14.865,19.612z"/>
+				<path d="M7.896,13.441L4.587,14.55c-0.382-0.583-1.039-0.97-1.787-0.97c-1.18,0-2.135,0.955-2.135,2.135 c0,1.181,0.955,2.136,2.135,2.136c1.179,0,2.136-0.955,2.136-2.136c0-0.049-0.011-0.095-0.015-0.144l3.319-1.111	C8.092,14.138,7.973,13.798,7.896,13.441z"/>
+				<circle cx="12.666" cy="12.411" r="3.662"/>
+			</svg>
+
+
+			<h4 ng-if="showTextEnglish">Connected to:</h4>
+
+			<a class="read_more_link int-link"
+				ng-mouseenter="reportReadMore('hover')"
+				ng-mousedown="reportReadMore('click')"
+				ng-repeat="readMoreArticle in readMoreArticles | limitTo:3" href="{{::readMoreArticle.link}}" ng-class="{no_thumb: readMoreArticle.thumb == 'none'}">
+				<span class="title">{{::readMoreArticle.title}}</span>
+			</a>
+
+		</nav>
+
+
+		<h2>From Wikipedia, the free encyclopedia</h2>
+
+	</section>
+
+
+	
+
+	
+	<!-- the styling below is used for the smooth transition between the partial content and the final content -->
+	<style>
+		.content-absolute {
+			position: absolute;
+			z-index: 200;
+		}
+		#partialContent {
+			min-height: 1000px;
+		}
+	</style>
+
+	<!--<div id='partialContent'></div>-->
+	<div id='fullContent'></div>
+		
+	<a ng-href="{{bottomLinkUrl}}" target="_blank" ng-click="onBottomLinkClick()">
+		<span id="bottom_link" ng-cloak ng-if="showBottomLink" style="display: block; text-align:center; font-family: 'Lora', serif; line-height: 1.5em; font-size: 24px; padding: 20px 15px; border-radius: 5px; box-shadow:0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); background: linear-gradient(to bottom, #40bbe1 -100%, #1559b5 100%); direction: ltr;"> 
+			<span style="display:block; font-size: 0.8em; color: rgba(255,255,255,0.85)">{{bottomLinkPreText}}</span>
+			<span style="display:block; font-size: 1em; color: white">{{bottomLinkText}}</span>
+		</span>
+	</a>
+
+	<!-- discover MORE SECTION -->
+	<nav id="discover_more" class="{{discoverMoreType}}" ng-if="(showDiscoverMore != 0)">
+
+
+		<h4 ng-if="showTextEnglish">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px">
+				<path d="M24.966,12.5l-7.685-2.881L19.11,5.89l-3.717,1.858L12.5,0.034L9.619,7.719L5.89,5.89l1.859,3.718L0.034,12.5l7.685,2.882		L5.89,19.11l3.718-1.86l2.892,7.716l2.882-7.685l3.729,1.829l-1.86-3.717L24.966,12.5z M2.5,12.5l5.821-1.903l2.62,1.903H2.5z		 M12.5,22.438l-1.835-5.725l1.835-2.655V22.438z M12.5,10.941V2.563l2.094,5.75L12.5,10.941z M14.058,12.5h8.474l-5.813,2.125		L14.058,12.5z"/>
+			</svg>
+			<span>{{discoverMoreTitle}}</span>
+		</h4>
+
+		<a class="read_more_link" data-id="{{::discoverMoreArticle.id}}"
+			ng-mouseenter="reportDiscoverMore('hover', discoverMoreArticle.id)"
+			ng-mousedown="reportDiscoverMore('click', discoverMoreArticle.id)"
+			ng-repeat="discoverMoreArticle in discoverMoreArticles | limitTo:3" href="{{::discoverMoreArticle.link}}" ng-class="{no_thumb: discoverMoreArticle.thumb == 'none'}">
+			<span class="tileBg" style="background-image: url('{{discoverMoreArticle.thumb}}')"></span>
+			<span class="content">
+				<span class="title">{{::discoverMoreArticle.title}}</span>
+				<span class="txt">
+					{{::discoverMoreArticle.txt}}
+				</span>
+			</span>
+		</a>
+
+	</nav>
+
+	
+
+
+	<section ng-cloak ng-show="$root.showArticleContents" class="page_copyright" ng-init="mainImage = articleData.mainImage">
+		
+		This page is based on a <a ng-href="http://www.wikipedia.org" target="_blank" rel="nofollow">Wikipedia</a> article written by
+		<a href="{{::articleData.links.wikipediaHistory }}" target="_blank" rel="nofollow">contributors</a> (<a ng-href="{{::articleData.links.wikipediaRead }}" target="_blank" rel="nofollow">read</a>/<a href="{{::articleData.links.wikipediaEdit }}" target="_blank" rel="nofollow">edit</a>).<BR>
+		Text is available under the
+		<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="license,nofollow">CC BY-SA 4.0</a> license; additional terms may apply.<BR>
+		Images, videos and audio are available under their respective licenses.<BR>
+
+		<div ng-if="mainImage.wikipediaPageFullUrl">
+			<span ng-show="mainImage.info.license.url">Cover photo is available under <a href="{{::mainImage.info.license.url}}" target="_blank">{{::mainImage.info.license.name || 'Unknown'}}</a> license.</span>
+			<span ng-show="!mainImage.info.license.url">Cover photo is available under {{::mainImage.info.license.name || 'Unknown'}} license.</span>
+			Credit:
+			<span ng-bind-html="mainImage.info.license.artist"></span> (<a target="_blank" href="{{::mainImage.wikipediaPageFullUrl}}">see original file</a>).
+		</div>
+		
+		<div class="line"></div>
+	</section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+	
+
+
+			<!--************ wikiwand_footer ************-->
+			<footer class="wikiwand_footer" ng-cloak ng-show="$root.showArticleContents || !articleData.pageIsArticle">
+
+
+				
+				<div ng-if="$root.activation.nextAction != ''">
+
+					<!-- touch devices footer share -->
+					<div ng-if="$root.touchDevice"  class="mobile_share">
+						<div class="footer_icon"></div>
+						<div class="h2">Enjoying Wikiwand?</div>
+						<div ng-cloak ng-if="!activation.extensionInstalled" class="h3">Give good old Wikipedia a great new look:</div>
+						
+
+<a href="javascript:void(0);" ng-cloak
+	ng-class="{active: btnHover}"
+	ng-mouseenter="$root.activationHover('enter')" ng-mouseleave="$root.activationHover('leave')"
+	ng-click="$root.reportClick('footer');$root.activationButtonClicked(''); $root.extensionPopup('click');" class="upgrade_button {{::$root.activation.nextAction}}" >
+	<span>{{::$root.activation.text}}</span><i></i>
+</a>
+
+					</div>
+
+					<!-- desktop upsale -->
+					<div ng-if="!$root.touchDevice" class="desktop_upsale">
+
+						<!-- desktop: rate -->
+						<div ng-if="$root.activation.extensionInstalled && $root.activation.nextAction == 'activation_rate'">
+							<div class="footer_icon"></div>
+							<div class="h2">Enjoying Wikiwand?</div>
+							
+
+<a href="javascript:void(0);" ng-cloak
+	ng-class="{active: btnHover}"
+	ng-mouseenter="$root.activationHover('enter')" ng-mouseleave="$root.activationHover('leave')"
+	ng-click="$root.reportClick('footer');$root.activationButtonClicked(''); $root.extensionPopup('click');" class="upgrade_button {{::$root.activation.nextAction}}" >
+	<span>{{::$root.activation.text}}</span><i></i>
+</a>
+
+							<div class="stars" ng-bind-html="activation.ratedText"></div>
+						</div>
+						<!-- desktop: share -->
+						<div ng-if="$root.activation.extensionInstalled && $root.activation.nextAction == 'activation_share'">
+							<div class="footer_invite_wrapper" class="hide_before_angular">
+								<div class="invite_box footer_invite_box active anim">
+									
+									<h4>Tell your friends about Wikiwand!</h4>
+
+<a style="background-color:#bb0000" target="_blank" ng-click="$root.pressedTellAFriendLink('gmail','footer')" href="http://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=Have you seen Wikiwand%3F&body=Check out Wikiwand - it's an awesome new interface for Wikipedia:%0Ahttp://www.wikiwand.com/{{::$root.refString}}%0AGive it a try, you'll thank me later :)"><i style="background-position: 0 -96px"></i> Gmail</a>
+
+<a style="background-color:#3B5999" target="_blank" ng-click="$root.pressedTellAFriendLink('facebook','footer')" target="_blank" href="http://www.facebook.com/sharer.php?u=http://www.wikiwand.com/{{::$root.refString}}"><i style="background-position: -120px -96px"></i> Facebook</a>
+
+<a style="background-color:#0084b4" target="_blank" ng-click="$root.pressedTellAFriendLink('twitter','footer')" target="_blank" href="http://twitter.com/share?text=Wikiwand gives good old Wikipedia a great new look - check it out:&hashtags=wikipedia,ux,design&url=http://www.wikiwand.com/{{::$root.refString}}&related=wikiwand"><i style="background-position: -150px -96px"></i> Twitter</a>
+
+<a class="link" ng-click="$root.pressedTellAFriendLink('link','footer')" ng-class="{wide: wideLink}"  style="background-color:#615a5f" href="javascript:void(0);"><i style="background-position: -90px -97px"></i><input type="text" value="http://www.wikiwand.com/" ng-focus="wideLink = true" ng-blur="wideLink = false" onClick="this.setSelectionRange(0, this.value.length)"/> Link</a>
+
+
+	<br><br>
+
+
+								</div>
+							</div>
+						</div>
+						<!-- desktop: install -->
+						<div ng-if="!$root.activation.extensionInstalled && $root.activation.nextAction == 'activation_install'">
+							<div class="footer_icon"></div>
+							<div class="h2">Enjoying Wikiwand?</div>
+							<div class="h3">Give good old Wikipedia a great new look:</div>
+							
+
+<a href="javascript:void(0);" ng-cloak
+	ng-class="{active: btnHover}"
+	ng-mouseenter="$root.activationHover('enter')" ng-mouseleave="$root.activationHover('leave')"
+	ng-click="$root.reportClick('footer');$root.activationButtonClicked(''); $root.extensionPopup('click');" class="upgrade_button {{::$root.activation.nextAction}}" >
+	<span>{{::$root.activation.text}}</span><i></i>
+</a>
+
+						</div>
+
+					</div>
+				</div>
+				
+
+
+
+				<ul class="social_links" ng-show="(!activation.extensionInstalled || activation.nextAction != 'activation_share') && !$root.showContentRecommendations">
+					<li class="facebook"><a class="hover" href="https://www.facebook.com/wikiwandapp" target="_blank"></a></li>
+					<li class="twitter"><a class="hover" href="https://twitter.com/wikiwand" target="_blank"></a></li>
+					<li class="gplus"><a class="hover" href="https://plus.google.com/+Wikiwand" target="_blank"></a></li>
+					<li class="linkedin"><a class="hover" href="http://www.linkedin.com/company/wikiwand" target="_blank"></a></li>
+				</ul>
+
+
+				<ul class="footer_links">
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/press">Press</a></li>
+					<li><a href="/sitemap">Site Map</a></li>
+					<li><a href="/terms">Terms Of Service</a></li>
+					<li><a href="/privacy">Privacy Policy</a></li>
+					<!--<li style="font-weight: 400"><a href="javascript:void(0);" ng-mouseenter="loadUserVoice()"  data-uv-trigger="contact">Send Feedback</a></li>-->
+				</ul>
+			</footer>
+			<!--************ wikiwand_footer ENDS ************-->
+
+
+
+		</div>
+		<!--**************************** content ENDS *****************************-->
+		
+
+
+		<!--************ gallery & lang  ************-->
+		
+
+		<!--************ TOC  ************-->
+		
+			
+
+<div ng-cloak id="toc_wrapper" ng-controller="TableOfContentsController" ng-swipe-left="$root.tocFold('swipeLeft')" ng-swipe-right="$root.tocFold('swipeRight')" ng-class="{active: $root.tocShow}" ng-show="$root.tocShow">
+
+	<div id="toc_swipe" ng-cloak ng-show="$root.tocShow" ng-swipe-left="$root.tocFold('swipeLeft')" ng-swipe-right="$root.tocFold('swipeRight')" ng-click="$root.tocFold()"></div>
+
+	<div id="toc_btn">
+		<span ng-cloak>X-Forwarded-For</span><i id="content_icon" ng-click="tocFold(); $root.userClick(true, 'toolbar-toc-hide');"></i></div>
+	<aside id="wikiwand_toc" class="unselectable lang_en" ng-cloak>
+		
+		<ul class="toc_list">
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_overview">
+				<a href='#overview' ng-click='button.doClick($event)'>
+					Introduction
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_Format">
+				<a href='#Format' ng-click='button.doClick($event)'>
+					Format
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_Proxy_servers_and_caching_engines">
+				<a href='#Proxy_servers_and_caching_engines' ng-click='button.doClick($event)'>
+					Proxy servers and caching engines
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_Load_balancers">
+				<a href='#Load_balancers' ng-click='button.doClick($event)'>
+					Load balancers
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_Alternatives_and_variations">
+				<a href='#Alternatives_and_variations' ng-click='button.doClick($event)'>
+					Alternatives and variations
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_See_also">
+				<a href='#See_also' ng-click='button.doClick($event)'>
+					See also
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_References">
+				<a href='#References' ng-click='button.doClick($event)'>
+					References
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+			<li class="{special:line.special}"
+				ng-click="tocMobileFold()" id="toc_btn_External_links">
+				<a href='#External_links' ng-click='button.doClick($event)'>
+					External links
+				</a>
+				
+				<ol class="sub_toc_list">
+					
+				</ol>
+				
+			</li>
+
+			
+		</ul>
+		
+	</aside>
+</div>
+
+		
+		
+
+
+
+
+<div ng-controller="BookmarkController">
+	<!-- gist -->
+	
+	<!-- bookmark -->
+	
+	
+<div ng-cloak id="bookmark_wrapper"
+	ng-show="$root.showBookmarkFeed" ng-click="$event.stopPropagation()">
+	<h4>
+		My Bookmarks
+		<span ng-cloak ng-if="$root.bookmarksProgressIndicator" class="loading_bookmarks">
+			<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"	 width="22px" height="22px" viewBox="0 0 22 22">
+				<path fill="none" stroke="#1559b5" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M3.125,11	c0-4.349,3.526-7.875,7.875-7.875c4.35,0,7.875,3.526,7.875,7.875c0,4.35-3.525,7.875-7.875,7.875"/>
+			</svg>
+		</span>
+		<span class="user_img" ng-if="$root.user.logins.facebook.isActive==true" ng-style="{'background-image' : 'url('+$root.user.info.picture+')'}"></span>
+	</h4>
+
+	<ul ng-cloak id="bookmarks">
+
+
+		<li ng-cloak id="bookmark_instructions" class="notice bookmark_instructions"
+			ng-if="bookmarks.length == 0 && !$root.bookmarksProgressIndicator && showBookmarkInstructionsLatch">
+			<div class="instructions_title">You have no bookmarks</div>
+			Add your first bookmark by <b>selecting some text</b> or <b>hovering over a link</b>. Look for the bookmark icon.
+		</li>
+
+		<li ng-cloak ng-if="alreadyHave" class="notice bookmark_card already">
+			Already have this bookmark
+		</li>
+
+		<li ng-cloak class="notice login_notice"
+			ng-if="$root.showBookmarkFeed && $root.user.logins.facebook.isActive!=true"
+			ng-controller="UserController">
+			<div class="connect" data-ng-disabled="!facebookReady" ng-click="bookmarksFacebookLoginButtonClick();">
+				<svg class="inline_block_mid" version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="22px" height="22px" viewBox="0 0 22 22">
+					<path fill="#fff" d="M15.582,1.837l-2.377-0.003c-2.671,0-4.397,1.771-4.397,4.511v2.081h-2.39c-0.207,0-0.374,0.167-0.374,0.374v3.013		c0,0.207,0.167,0.375,0.374,0.375h2.39v7.605c0,0.205,0.167,0.373,0.374,0.373h3.119c0.207,0,0.375-0.168,0.375-0.373v-7.605h2.793		c0.207,0,0.375-0.168,0.375-0.375l0.002-3.013c0-0.099-0.041-0.194-0.111-0.264c-0.07-0.07-0.166-0.109-0.264-0.109h-2.795V6.662		c0-0.848,0.199-1.278,1.305-1.278l1.602,0c0.207,0,0.373-0.167,0.373-0.374V2.211C15.955,2.005,15.789,1.838,15.582,1.837z"/>
+				</svg>
+				<span class="inline_block_mid">Connect to save your bookmarks</span>
+			</div>
+		</li>
+
+
+		<li ng-cloak id="bookmark_this" class="notice bookmark_card" ng-click="$root.bookmarkAdd('article','this')"
+			ng-if="showBookmarkThis && !$root.bookmarksProgressIndicator && showBookmarkThisLatch">
+			<span class="inline_block_mid">Bookmark this article</span>
+			<svg class="inline_block_mid" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="32px" height="32px" viewBox="0 0 32 32">
+				<polygon points="25.542,13.492 22.633,13.492 22.633,10.583 21.199,10.583 21.199,13.492 18.291,13.492 18.291,14.924  		21.199,14.924 21.199,17.833 22.633,17.833 22.633,14.924 25.542,14.924 	"/>
+				<path d="M21.447,20.333c-3.451,0-6.057-2.798-6.057-6.25c0-3.452,2.51-6.25,5.962-6.25C21.672,7.833,22,7.864,22,7.911V5H8v22.376 		l6.999-4.272L22,27.376v-7.12C22,20.302,21.768,20.333,21.447,20.333z"/>
+			</svg>
+		</li>
+
+
+		<li ng-cloak ng-repeat="bookmark in bookmarks | orderBy: '-createTime' "
+			ng-if="bookmark.synchronized!='deleting'"
+			class="bookmark_card {{bookmark.type}} {{bookmark.textDirection}}">
+
+			<section ng-click="openBookmark(bookmark)" ng-if="bookmark.type == 'article'">
+				<h5 class="book_title" >{{bookmark.articleTitle}}</h5>
+				<div class="book_img" ng-if="bookmark.thumbnail!='none'" ng-style="{'background-image' : 'url('+bookmark.thumbnail+')'}"></div>
+				<p class="book_txt">{{bookmark.text}}</p>
+			</section>
+
+			<section class="quote" ng-click="openBookmark(bookmark)" ng-if="bookmark.type == 'highlight'">
+				<p class="book_txt">&ldquo;<span ng-bind-html="bookmark.text"></span>&rdquo;</p>
+				<h5 class="highlight_title" ><span class="img inline_block_mid" ng-if="bookmark.thumbnail!='none'" ng-style="{'background-image' : 'url('+bookmark.thumbnail+')'}"></span> <span class="article inline_block_mid">From: {{bookmark.articleTitle}}</span></h5>
+			</section>
+
+			<span class="delete_button" ng-click="deleteBookmark(bookmark.bookmarkID)">
+				<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="20px" height="20px" viewBox="0 0 20 20">
+					<line fill="none" stroke-width="1" stroke-linecap="round" stroke-miterlimit="10" x1="7.438" y1="12.875" x2="12.563" y2="7.75"/>
+					<line fill="none" stroke-width="1" stroke-linecap="round" stroke-miterlimit="10" x1="7.438" y1="7.75" x2="12.563" y2="12.875"/>
+				</svg>
+			</span>
+		</li>
+
+
+
+	</ul>
+
+	<div id="end_grad"></div>
+
+</div>
+
+	
+</div>
+
+<!--************ gallery ************-->
+<div id="gallery" ng-cloak ng-controller="GalleryController" ng-show="galleryActive"
+	 class="hide_before_angular" ng-class="{full: galleryFull}">
+	<div class="bg" ng-click="closeGallery()"></div>
+	<div id="gallery_bg">
+		<!--************ gallery image ************-->
+		<div ng-cloak id="gallery_img" class="unselectable" ng-class="{active: infoOpen}">
+
+			<div id="gallery_img_placeholder"  ng-mouseenter="hoveredImg = true"  ng-mouseleave="hoveredImg = false" class="loadThumb unselectable" ng-swipe-right="onPrevClick()" ng-swipe-left="onNextClick()">
+				<div id="img_loading" ng-if="!current.bucket.loaded" class="loaderAnim unselectable"></div>
+				<img ng-show="current.info.type == 'image'" class="gallery_main bucket unselectable" ng-src="{{::current.bucket.src}}" ng-class="{active:current.bucket.loaded}" alt=""/>
+
+				<div ng-show="current.info.type == 'video'" class="gallery_main bucket video unselectable" ng-class="{active:current.bucket.loaded}">
+					<div class="payload_container"></div>
+				</div>
+
+			</div>
+
+			<div class="gallery_arrow next unselectable" ng-show="current.index != items.length-1" ng-click="onNextClick()"><i></i></div>
+			<div class="gallery_arrow prev unselectable" ng-show="current.index != 0" ng-click="onPrevClick()"><i></i></div>
+
+			<div ng-cloak ng-mouseenter="hoveredImg = true" ng-mouseleave="hoveredImg = false" id="img_counter">
+				{{current.index+1}} of {{items.length}}
+
+				<a ng-show="current.info.type == 'image'" ng-class="{active: hoveredImg}" class="pin_btn tooltip_top" title="Pin it" href="http://www.pinterest.com/pin/create/button/?url={{articleData.links.selfRead}}&media={{current.bucket.src}}&description=From Wikiwand:%20{{current.titleTxt}}" target="_blank"></a>
+				<div class="report tooltip_top" ng-show="current.info.type == 'image'" ng-class="{active: hoveredImg}" title="Suggest as cover photo"
+					ng-click="$root.showCoverImageSuggestPopup=true;$root.showSuggestImageText1=true;$root.showSuggestImageText2=false;"></div>
+			</div>
+			<div id="img_title" ng-bind-html="current.title"></div>
+
+
+			<!--************ gallery thumbs ************-->
+			<div id="gallery_thumbs_con" class="unselectable">
+				<!--<div id="gallery_thumbs_pull" class="unselectable"></div>-->
+				<div id="gallery_thumbs_scroll" class="unselectable">
+					<ul id="gallery_thumbs" class="unselectable">
+						<li class="unselectable" ng-click="onThumbClick($event, item)" ng-class="{active:item.active, video:item.info.type == 'video'}" ng-repeat="item in items" ng-style="{'background-image': item.urlString}"></li>
+					</ul>
+				</div>
+			</div>
+
+
+			<!--************ gallery btns ************-->
+			<ul id="gallery_btn">
+				<li id="gallery_info_pull" ng-click="infoOpen = !infoOpen" ng-class="{active: infoOpen}"></li>
+				<li id="gallery_close" ng-click="closeGallery()"></li>
+				<li id="full_screen" ng-click="toggleFullScreen()" ng-class="{active:fullScreenActive, unactive:!fullScreenActive}"></li>
+			</ul>
+		</div>
+		<!--************ gallery info  ************-->
+		<div id="gallery_info"  ng-swipe-right="infoOpen = false" ng-show="infoOpen">
+			<div id="gallery_info_wrap">
+				<div ng-if="current.title" class="image_caption" ng-bind-html="current.title"></div>
+                <ul>
+					<li ng-show="current.info.description" class="unselectable img_desc"><i></i>
+						<div class="description_text" ng-bind-html="current.info.descriptionSafe"></div>
+					</li>
+
+					<li class="img_date" ng-show="current.info.dateOriginal"><i></i>Date: {{current.info.dateOriginal || 'Unknown'}}</li>
+					<li class="img_date" ng-show="!current.info.dateOriginal"><i></i>Date: {{(current.info.date | date:'mediumDate') || 'Unknown'}}</li>
+					<li ng-show="current.info.license.artist" class="with-child unselectable img_credit" ng-click="subInfoOpen1 = !subInfoOpen1"><i></i>Credit: <span ng-bind-html="current.info.license.artist"></span>
+						<ul ng-show="subInfoOpen1">
+							<li>Uploaded by: {{current.info.uploadUser}} on {{current.info.uploadDate | date:'mediumDate'}}</li>
+							<li><span ng-bind-html="current.info.license.credit"></span></li>
+						</ul>
+					</li>
+					<li ng-show="current.info.license.url"  class="img_license"><i></i>License: <a href="{{current.info.license.url}}" target="_blank">{{current.info.license.usageTerms || current.info.license.name || current.info.license.detected || 'Unknown'}}</a></li>
+					<li ng-show="!current.info.license.url" class="img_license"><i></i>License: {{current.info.license.usageTerms || current.info.license.name || current.info.license.detected || 'Unknown'}}</li>
+					<li class="img_original"><i></i><a target="_blank" href="{{current.wikipediaPageFullUrl}}">View file on Wikipedia</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<div ng-show="$root.showCoverImageSuggestPopup" class="report_popup_wrapp suggest">
+		<div class="bg" ng-click="$root.showCoverImageSuggestPopup = false"></div>
+		<div class="report_popup">
+
+			<div ng-show="$root.showSuggestImageText1">
+				<h3>Suggest as cover photo</h3>
+				<p>Would you like to suggest this photo as the cover photo for this article?</p>
+				<a href="" target="_blank" ng-click="$root.suggestImage($event,'recommended',current.original.url);" ></i>Yes, this would make a good choice</a>
+				<a href="" target="_blank" ng-click="$root.showCoverImageSuggestPopup=false" ></i>No, never mind</a>
+			</div>
+
+			<div ng-show="$root.showSuggestImageText2">
+				<h3>Thank you for helping!</h3>
+				<br>
+				<p>Your input will affect cover photo selection, along with input from other users.<br>
+			</div>
+			<div class="ex" ng-click="$root.showCoverImageSuggestPopup = false"></div>
+		</div>
+	</div>
+
+
+</div>
+<!--************ gallery ENDS ************-->
+
+
+<!-- fixed_btns at the bottom -->
+
+<div id="fixed_btns">
+
+	<!-- audio_player  -->
+	<div id="audio_player" class="unselectable"><i class="unselectable"></i>
+
+		<div class="unselectable"></div>
+		<span class="listen hide">Listen to this article</span></div>
+
+
+	
+
+	<div class="dialog_wrapper follow_dialog hide_before_angular" ng-cloak ng-if="$root.showVidReport">
+		<div class="bg" ng-click="$root.showVidReport = false"></div>
+		<div class="dialog_box  round active" style="height: auto;padding: 20px" ng-class="{active: $root.showVidReport}">
+			<p>Thanks for reporting this video!</p>
+		</div>
+	</div>
+
+
+	
+
+
+</div>
+
+
+
+
+<script>
+	if (!precache_from_extension) {
+		if (typeof (analytics) != 'undefined') {
+			analytics.gaVirtualPageView('virtualpageview/impression-article-page');
+		}
+	} else {
+		if (typeof (analytics) != 'undefined') {
+			analytics.gaVirtualPageView('virtualpageview/iframe-precache-article');
+		}
+	}
+</script>
+
+
+
+
+
+<!--*************************** search  *************************-->
+
+
+
+<!--*************************** search  *************************-->
+<div ng-cloak id="wikiwand_search" ng-init="initSearch()" ng-controller="ArticleSearchControllerRev2" ng-show="$root.showSearch">
+	<div class="bg darkBlack" ng-click="$root.openSearch('close')"></div>
+
+
+	<div id="search_list" ng-class="{on: search.query.length}">
+
+		<input id="queryinput" autocomplete="off" class="toolbar-search" type="text" ng-class="{selectedResult: noSelection, loading:waiting}"
+			ng-model="search.query" ng-keyup="testKeyboard($event)" placeholder="Search"/>
+
+		<div id="articleSearch"  ng-show="search.query.length">
+
+			<ul class="results-container"  ng-show="search.results.length">
+				<li class='searchResult'  ng-repeat="result in search.results" ng-click='resultClicked($event,"{{result.linkEncoded}}");'
+					desc-attr="{{result.desc}}" id='result_{{$index}}'  ng-class="{selectedResult:result.selected, rtl: result.rtl}">
+					<span class="thumbicon" ng-style="{'background-image' :result.backgroundImageSring}"></span>
+					<span ng-if="result.firstInlang" class='langtag'><i>{{result.lang}}</i></span>
+					<span class='value'>{{result.T}}</span>
+					<div class='suggestion-type-icon {{result.c}}'></div>
+				</li>
+			</ul>
+
+			<div id="no_results" ng-if="noResults && search.query && !waiting">
+				No matching articles found
+			</div>
+			<a ng-show="search.query && !waiting" class='searchResult containing' href="/en/{{search.query}}?fullSearch=true"
+				ng-class="{selectedResult:fullSearch}">
+
+				<span class='value'>Search for articles containing: <i>{{search.query}}</i></span>
+			</a>
+		</div>
+		<img src="//d3isfnyiuldmfu.cloudfront.net/img/search_ctrl.svg?h=d6f97027b3a0484c7d30c4936ecdbae8"  ng-if="!$root.touchDevices" id="search-hint" style="display: block; margin: 20px auto"/>
+
+	</div>
+
+
+
+
+	<div id="search_description">
+
+	</div>
+
+</div>
+<!--*************************** search ENDS *************************-->
+
+<!--*************************** search ENDS *************************-->
+
+<popups ng-if="$root.loadVariousPopups" ng-include="'/api/various_popups'"></popups>
+<!--************ follow dialog ************-->
+
+
+	
+
+
+	
+
+
+	</div>
+<div id="error_message" style="display:none;width:500px;padding: 20px;margin: 30vh auto;font-size:16px;text-align:center;">
+<h1>Oh no, there's been an error</h1>
+Please help us solve this error by emailing us at <a href="http://mail.google.com/mail/?view=cm&fs=1&tf=1&to=support@wikiwand.com&su=Encountered an error on Wikiwand" target='_blank'>support@wikiwand.com</a><br>
+Let us know what you've done that caused this error, what browser you're using, and whether you have any special extensions/add-ons installed.<br>
+Thank you!
+</div>
+</body>
+
+
+
+</html>
+
+
+
+<script>var totalServingTime=0;</script>
+
+进程已结束,退出代码0
